@@ -1,6 +1,6 @@
 export const googleParams = {
 	sheets_api : "https://sheets.googleapis.com/v4/spreadsheets/",
-	api_key : "YOUR_API_KEY",
-	layout_id : "YOUR_LAYOUT_GOOGLE_SHEET_ID",
-	product_id : "YOUT_PRODUCT_GOOGLE_SHEET_ID"
+	api_key : "AIzaSyD153y79wg6mVQB4AneBFPPmNyOncecV-w",
+	layout_id : "1arXJbxpmpxPGgtIr972U_4PtSSvpz0dViihrzEhOqLI",
+	product_id : "10-yWLhJ0HkgGHlE-tOjI-sg6hKRIKnrE9IYwQ8ppouc"
 };

@@ -5,14 +5,14 @@ import { getLayout } from './layout/actions.js';
 import { ReactTypeformEmbed } from 'react-typeform-embed';
 import { colorCheck } from '../utils/validate';
 import Logo from '../components/logo';
-import BottomCartBar from '../components/bottomCartBar';
+// import BottomCartBar from '../components/bottomCartBar';
 import ProductGrid from './product/grid';
 import 'semantic-ui-css/semantic.min.css';
 
 class Root extends Component{
 	constructor(props){
 		super(props);
-	}		
+	}
 	componentDidMount(){
 		const { getLayout } = this.props;
 		getLayout();
@@ -36,14 +36,14 @@ class Root extends Component{
 			alignItems : 'center',
 			justifyContent : 'space-between',
 			width : '100%',
-			backgroundColor : 'white'	
+			backgroundColor : 'white'
 		};
 		Object.keys(layout).map((property)=>{
 			if(layout[property] !== null && layout[property] !== undefined){
 				let thisValue = layout[property];
 				switch(property){
 					case 'bodyColor':
-						if(colorCheck(thisValue) === true) 
+						if(colorCheck(thisValue) === true)
 							bodyStyle.backgroundColor = thisValue;
 					break;
 					case 'bodyImage':
@@ -80,9 +80,9 @@ class Root extends Component{
 		return (
 			<div style={renderStyle.body}>
 				<div style={renderStyle.main}>
-					<Logo layout={layout}/>				
+					<Logo layout={layout}/>
 					<ProductGrid layout={layout}/>
-					<BottomCartBar layout={layout}/>
+					{/* <BottomCartBar layout={layout}/> */}
 				</div>
 			</div>
 		)
@@ -90,16 +90,15 @@ class Root extends Component{
 }
 
 function mapStateToProps(state){
-	return { 
+	return {
 		layout : state.layout.settings
 	}
 };
 
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ 
+	return bindActionCreators({
 		getLayout
 	}, dispatch)
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(Root);
-

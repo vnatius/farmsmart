@@ -1,8 +1,8 @@
 import { request } from '../../utils/fetch';
 import { googleParams } from '../../config/env';
-const { 
+const {
 	sheets_api,
-	api_key , 
+	api_key ,
 	product_id
 } = googleParams;
 
@@ -10,7 +10,7 @@ export function getProduct(){
 	return (dispatch, getState)=>{
 		request(sheets_api+product_id+'?includeGridData=true&key='+api_key, 'GET')
 			.then((res)=>{
-				//console.log(res);	
+				//console.log(res);
 				let productList = [];
 				let { rowData } = res['sheets'][0]['data'][0];
 				rowData.shift();
@@ -19,17 +19,17 @@ export function getProduct(){
 					const { values } = data;
 					let product = {};
 					product['id'] = index;
-					product['name'] = values[0]['formattedValue'];
-					product['price'] = values[1]['formattedValue'];
-					product['thumbnail'] = values[2]['formattedValue'];
-					product['description'] = (values[3]['formattedValue'] !== undefined && values[3]['formattedValue'] !== null) ? values[3]['formattedValue'] : null;
+					product['Title'] = values[7]['formattedValue'];
+					product['Gender'] = values[10]['formattedValue'];
+					product['Photo'] = values[8]['formattedValue'];
+					product['State'] = (values[3]['formattedValue'] !== undefined && values[3]['formattedValue'] !== null) ? values[3]['formattedValue'] : null;
 					product['images']=[];
 
-					for(let i = 4 ; i < 9 ; i++){
-						if(values[i] !== null && values[i] !== undefined){
-							product['images'].push(values[i]['formattedValue']);
-						}
-					};
+					// for(let i = 4 ; i < 9 ; i++){
+					// 	if(values[i] !== null && values[i] !== undefined){
+					// 		product['images'].push(values[i]['formattedValue']);
+					// 	}
+					// };
 					productList.push(product);
 
 				});
@@ -51,7 +51,7 @@ export function amendCart(action,item){
 			if(cartItem.id === item.id){
 				exist = true;
 				if(action === 'add'){
-					cartItem.quantity += 1;				
+					cartItem.quantity += 1;
 				} else {
 					cartItem.quantity -= 1;
 					if(cartItem.quantity === 0) remove = index;
@@ -71,10 +71,9 @@ export function amendCart(action,item){
 		console.log(cart);
 		console.log(action);
 		console.log(item);
-		dispatch({ 
+		dispatch({
 			type : 'UPDATE_CART',
 			value : cart
 		});
 	}
 }
-
